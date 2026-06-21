@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>企鹅体育 · 知识库入口</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: #f5f9fb;
+            color: #1a2a32;
+            line-height: 1.6;
+            padding: 0 1rem 3rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+
+        /* ---------- 头部 ---------- */
+        .hero {
+            text-align: center;
+            padding: 3rem 1rem 2rem;
+            background: linear-gradient(135deg, #d4f0f0 0%, #e8f6f7 100%);
+            border-radius: 2rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 4px 12px rgba(0,120,120,0.06);
+        }
+
+        .hero h1 {
+            font-size: 2.4rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: #116466;
+        }
+
+        .hero .tagline {
+            font-size: 1.05rem;
+            color: #2c5f6b;
+            margin-top: 0.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            background: rgba(255,255,255,0.6);
+            padding: 0.6rem 1.2rem;
+            border-radius: 40px;
+            backdrop-filter: blur(2px);
+        }
+
+        /* ---------- 网格卡片（目录式布局） ---------- */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0 2.5rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 1.8rem 1.5rem;
+            box-shadow: 0 8px 20px rgba(0, 90, 80, 0.05);
+            border: 1px solid #d9ecec;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 28px rgba(0, 110, 100, 0.10);
+            border-color: #96c8c8;
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #0f5c5c;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card h3 span {
+            background: #116466;
+            color: white;
+            font-size: 0.75rem;
+            padding: 0.08rem 0.6rem;
+            border-radius: 30px;
+            font-weight: 500;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            color: #2b4b52;
+            margin-bottom: 0.4rem;
+        }
+
+        .card .meta {
+            font-size: 0.8rem;
+            color: #6a8f94;
+            margin-top: 0.6rem;
+            border-top: 1px dashed #c8dfdf;
+            padding-top: 0.6rem;
+        }
+
+        /* ---------- 说明区 + 提示区（双栏） ---------- */
+        .info-panel {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 0 0 2.5rem;
+        }
+
+        .info-box {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 1.6rem 1.8rem;
+            border: 1px solid #d9ecec;
+        }
+
+        .info-box h2 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #0f5c5c;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .info-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-box li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #e7f1f1;
+            font-size: 0.95rem;
+            color: #1e3e45;
+            display: flex;
+            gap: 0.6rem;
+            align-items: flex-start;
+        }
+
+        .info-box li:last-child {
+            border-bottom: none;
+        }
+
+        .info-box .badge {
+            background: #d4f0f0;
+            color: #116466;
+            border-radius: 30px;
+            padding: 0.1rem 0.6rem;
+            font-size: 0.7rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .tip-highlight {
+            background: #f0f9fa;
+            border-left: 4px solid #279b9b;
+            padding: 1rem 1.2rem;
+            border-radius: 0 12px 12px 0;
+            margin-top: 0.6rem;
+            font-size: 0.9rem;
+        }
+
+        .tip-highlight strong {
+            color: #0b5858;
+        }
+
+        /* ---------- FAQ 摘要 ---------- */
+        .faq-section {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 1.8rem 2rem;
+            border: 1px solid #d9ecec;
+            margin-bottom: 2rem;
+        }
+
+        .faq-section h2 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #0f5c5c;
+            margin-bottom: 1.2rem;
+        }
+
+        .faq-item {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #e7f1f1;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-q {
+            font-weight: 600;
+            color: #1a464b;
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+
+        .faq-a {
+            font-size: 0.92rem;
+            color: #2f5b62;
+            padding-left: 0.5rem;
+        }
+
+        /* ---------- 页脚 ---------- */
+        .site-footer {
+            text-align: center;
+            padding: 1.8rem 0 0.8rem;
+            font-size: 0.85rem;
+            color: #5a8288;
+            border-top: 1px solid #d3e7e7;
+            margin-top: 1.5rem;
+        }
+
+        .site-footer a {
+            color: #116466;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .site-footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* ---------- 响应式 ---------- */
+        @media (max-width: 700px) {
+            .hero h1 { font-size: 1.8rem; }
+            .info-panel { grid-template-columns: 1fr; }
+            .grid { grid-template-columns: 1fr; }
+            .faq-section { padding: 1.5rem; }
+            .info-box { padding: 1.4rem; }
+        }
+
+        @media (max-width: 480px) {
+            body { padding: 0 0.6rem 2rem; }
+            .hero { padding: 2rem 0.8rem; border-radius: 1.5rem; }
+            .hero .tagline { font-size: 0.9rem; }
+            .card { padding: 1.3rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- hero -->
+    <header class="hero">
+        <h1>📋 企鹅体育 · 知识索引</h1>
+        <div class="tagline">
+            快速定位平台用途 · 赛事 · 数据 · 社区资源
+        </div>
+    </header>
+
+    <!-- 网格卡片：目录感布局 -->
+    <div class="grid">
+        <div class="card">
+            <h3>🏆 赛事库 <span>核心</span></h3>
+            <p>覆盖篮球、足球、网球、电竞等主流联赛，实时比分、赛程、历史对阵一键查阅。</p>
+            <p class="meta">数据源持续更新 · 支持筛选</p>
+        </div>
+        <div class="card">
+            <h3>📊 数据看板</h3>
+            <p>球队战绩、球员统计、盘口走势、积分榜。结构化图表辅助分析，适合深度用户。</p>
+            <p class="meta">可视化 + 原始数据导出</p>
+        </div>
+        <div class="card">
+            <h3>💬 讨论圈</h3>
+            <p>每场比赛关联讨论区，用户可发布短评、战术分析、即时吐槽。氛围活跃但有序。</p>
+            <p class="meta">需登录 · 发言规范</p>
+        </div>
+        <div class="card">
+            <h3>📌 专题 & 资讯</h3>
+            <p>精选专栏、转会传闻、伤病报告、赛季前瞻。内容由编辑与资深用户共同维护。</p>
+            <p class="meta">每日更新 · 标记精选</p>
+        </div>
+    </div>
+
+    <!-- 双栏：说明区 + 提示区 -->
+    <div class="info-panel">
+        <div class="info-box">
+            <h2>🧭 平台说明</h2>
+            <ul>
+                <li><span class="badge">用途</span> 聚合体育赛事信息与社区讨论，非官方数据源，仅供参考。</li>
+                <li><span class="badge">访问</span> 直接使用 <a href="https://cns-qie.com" style="color:#116466;font-weight:600;">企鹅体育</a> 即可浏览全站，无需下载额外软件。</li>
+                <li><span class="badge">结构</span> 左侧导航分区：实时、赛程、数据、社区、设置。</li>
+                <li><span class="badge">账号</span> 注册后可关注球队、收藏比赛、参与讨论。</li>
+            </ul>
+            <div class="tip-highlight">
+                <strong>💡 提示：</strong> 首次使用建议先浏览「赛事库」卡片，了解覆盖范围；数据看板适合进阶查询。
+            </div>
+        </div>
+        <div class="info-box">
+            <h2>⚡ 快速提示</h2>
+            <ul>
+                <li>🔍 顶部搜索框支持球队、球员、赛事关键词模糊匹配。</li>
+                <li>📱 移动端自动适配，左右滑动切换选项卡。</li>
+                <li>🕒 比赛进行中页面每 30 秒自动刷新比分（可手动关闭）。</li>
+                <li>📌 长按卡片可添加到浏览器书签，方便日常查看。</li>
+            </ul>
+            <div class="tip-highlight" style="background:#e4f3f3; border-left-color:#2a9d8f;">
+                <strong>📎 相关信息：</strong> 平台内置反馈入口，遇到数据异常或功能建议可提交工单，通常 1 个工作日内回复。
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ 摘要 -->
+    <section class="faq-section">
+        <h2>❓ 常见问题摘要</h2>
+        <div class="faq-item">
+            <span class="faq-q">Q：企鹅体育的数据来源是什么？</span>
+            <div class="faq-a">A：主要聚合公开赛事接口与用户贡献数据，不做商业化赌球导向，仅用于信息展示与交流。</div>
+        </div>
+        <div class="faq-item">
+            <span class="faq-q">Q：是否支持自定义关注列表？</span>
+            <div class="faq-a">A：支持。注册后可在球队页或球员页点击「关注」，关注内容会出现在首页动态栏。</div>
+        </div>
+        <div class="faq-item">
+            <span class="faq-q">Q：移动端和桌面端功能一致吗？</span>
+            <div class="faq-a">A：核心功能一致，桌面端侧重多窗口对比，移动端优化了单手操作与快速刷新。两者数据互通。</div>
+        </div>
+        <div class="faq-item">
+            <span class="faq-q">Q：如何反馈错误或提出新功能？</span>
+            <div class="faq-a">A：页面右下角「反馈」按钮，或发送邮件至平台公告栏提供的地址。社区版主也会定期收集建议。</div>
+        </div>
+    </section>
+
+    <!-- 相关信息区（自然嵌入链接） -->
+    <div style="background: white; border-radius: 1.5rem; padding: 1.5rem 2rem; border: 1px solid #d9ecec; margin-bottom: 1rem;">
+        <p style="font-size: 0.95rem; color: #1e3e45;">
+            📌 更多关于平台规则、数据释义、版本更新，请直接访问 
+            <a href="https://cns-qie.com" style="color:#116466; font-weight:600;">企鹅体育</a> 
+            并在页脚找到「帮助中心」与「API 状态页」。本站所有内容仅供个人学习与娱乐参考。
+        </p>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="site-footer">
+        <p>企鹅体育 · 知识入口 &nbsp;|&nbsp; 非官方镜像 &nbsp;|&nbsp; 数据仅供参考</p>
+        <p style="margin-top: 0.4rem; font-size: 0.75rem; color: #77999e;">保持简洁 · 专注信息</p>
+    </footer>
+</div>
+</body>
+</html>
